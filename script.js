@@ -86,28 +86,60 @@ var upperCasedCharacters = [
   'Y',
   'Z'
 ];
+
+var enter; 
+var confirmNumericCharacters;
+var confirmSpecialCharacters;
+var confirmLowerCasedCharacters;
+var confirmUpperCasedCharacters;
+var choices;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-var passwordChoice =  {
-  length : 0,
-  lowercase : false,
-}
-  var validNumber = false
-  while (validNumber === false) {
-    var numberChoice = prompt("Enter a number between 10 and 64")
-    if (numberChoice > 64 || numberChoice < 10) {
-      alert("the number is not between 10 and 64")
+
+    enter = parseInt(prompt("How many characters do you want your password to have? (choose a number between 10 to 64)"));
+
+    if (!enter ) {
+        alert('This needs a value')
+    }
+    else if ( enter <= 10 || enter >= 64 ) {
+        parseInt(prompt("You must choose a number between 10 to 64"))
     }
     else {
-      validNumber = true
-      passwordChoice.length = numberChoice
+        confirmNumericCharacters = confirm("Do you want to numbers?")
+        confirmSpecialCharacters = confirm("Do you want special characters?")
+        confirmLowerCasedCharacters = confirm ("Do you want lower cases?")
+        confirmUpperCasedCharacters = confirm ("Do you want upper cases?")
     }
-  }
-console.log("the loop has finished!!!")
-var lowercaseChoice = confirm("Would you like lowercase letters in your password?")
-console.log(lowercaseChoice)
-passwordChoice.lowercase = lowercaseChoice
-return passwordChoice
+    // if the user doesn't make any choises an allert promt comes up
+    if (!confirmNumericCharacters && !confirmSpecialCharacters && !confirmLowerCasedCharacters && !confirmUpperCasedCharacters) {
+        choices = alert("You must choose at least one character type")
+    }
+    // if all characters are selected an array containing all the characters is created 
+    else if ( confirmNumericCharacters && confirmSpecialCharacters && confirmLowerCasedCharacters && confirmUpperCasedCharacters ) {
+        choices = numericCharacters.concat(specialCharacters, lowerCasedCharacters, upperCasedCharacters)
+    }
+    else if ( confirmNumericCharacters && confirmSpecialCharacters && confirmLowerCasedCharacters ) {
+        choices = numericCharacters.concat(specialCharacters, lowerCasedCharacters)
+    }
+    else if ( confirmNumericCharacters && confirmSpecialCharacters ) {
+        choices = numericCharacters.concat(specialCharacters)
+    }
+    else if ( confirmNumericCharacters) {
+        choices = numericCharacters
+    }
+    else if (confirmSpecialCharacters) {
+        choices = specialCharacters
+    }
+    else if (confirmLowerCasedCharacters) {
+        choices = lowerCasedCharacters
+    }
+    else if ( confirmUpperCasedCharacters ) {
+        choices = upperCasedCharacters
+    }
+
+    
+
 }
 
 
