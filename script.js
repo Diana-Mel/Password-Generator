@@ -122,8 +122,26 @@ function getPasswordOptions() {
     else if ( confirmNumericCharacters && confirmSpecialCharacters && confirmLowerCasedCharacters ) {
         choices = numericCharacters.concat(specialCharacters, lowerCasedCharacters)
     }
+    else if ( confirmNumericCharacters && confirmSpecialCharacters && confirmUpperCasedCharacters ) {
+        choices = numericCharacters.concat(specialCharacters, upperCasedCharacters)
+    }
+    else if ( confirmLowerCasedCharacters && confirmSpecialCharacters && confirmUpperCasedCharacters ) {
+        choices = lowerCasedCharacters.concat(specialCharacters, upperCasedCharacters)
+    }    
     else if ( confirmNumericCharacters && confirmSpecialCharacters ) {
         choices = numericCharacters.concat(specialCharacters)
+    }
+    else if ( confirmNumericCharacters && confirmLowerCasedCharacters ) {
+        choices = numericCharacters.concat(lowerCasedCharacters)
+    }
+    else if ( confirmNumericCharacters && confirmUpperCasedCharacters ) {
+        choices = numericCharacters.concat(upperCasedCharacters)
+    }
+    else if ( confirmSpecialCharacters && confirmLowerCasedCharacters ) {
+        choices = specialCharacters.concat(lowerCasedCharacters)
+    }
+    else if ( confirmLowerCasedCharacters && confirmUpperCasedCharacters ) {
+        choices = lowerCasedCharacters.concat(upperCasedCharacters)
     }
     else if ( confirmNumericCharacters) {
         choices = numericCharacters
@@ -137,27 +155,30 @@ function getPasswordOptions() {
     else if ( confirmUpperCasedCharacters ) {
         choices = upperCasedCharacters
     }
-
-    
-
 }
 
 
 
 // Function for getting a random element from an array
-function getRandom(arr) {
-}
 
+var passwordFinal = [];  
 
+    for (var i = 0; i < enter; i++) {
+        var pickChoices = choices[Math.floor(Math.random() * choices.length)];
+        passwordFinal.push(pickChoices);
+    }
+    
 
 // Function to generate password with user input
+
 function generatePassword() {
-  var passwordChoice = getPasswordOptions()
-  console.log(passwordChoice)
-  return "I'm generating a password"
+passwordFinal = passwordFinal + pickChoices;
+console.log(passwordFinal)
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
+
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
