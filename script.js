@@ -92,9 +92,9 @@ var confirmLowerCasedCharacters;
 var confirmUpperCasedCharacters;
 var choices;
 
-// Function to prompt user for password options
-function generatePassword() {
+function getPaswordChoices(){
 
+    // promts the user to establish how long the they want the pasword to be 
     enter = parseInt(prompt("How many characters do you want your password to have? (choose a number between 10 to 64)"));
 
     if (!enter ) {
@@ -103,20 +103,22 @@ function generatePassword() {
     else if ( enter <= 10 || enter >= 64 ) {
         parseInt(prompt("You must choose a number between 10 to 64"))
     }
+    //asks the user to confirm the format of the pasword 
     else {
         confirmNumericCharacters = confirm("Do you want to numbers?")
         confirmSpecialCharacters = confirm("Do you want special characters?")
         confirmLowerCasedCharacters = confirm ("Do you want lower cases?")
         confirmUpperCasedCharacters = confirm ("Do you want upper cases?")
     }
+
     // if the user doesn't make any choises an allert promt comes up
     if (!confirmNumericCharacters && !confirmSpecialCharacters && !confirmLowerCasedCharacters && !confirmUpperCasedCharacters) {
         choices = alert("You must choose at least one character type")
     }
+    // arraays are created depending on user's choices 
     if (!confirmNumericCharacters && !confirmSpecialCharacters && !confirmLowerCasedCharacters && !confirmUpperCasedCharacters) {
         choices = alert("You must choose at least one character type")
     }
-    // if all characters are selected an array containing all the characters is created 
     else if ( confirmNumericCharacters && confirmSpecialCharacters && confirmLowerCasedCharacters && confirmUpperCasedCharacters ) {
         choices = numericCharacters.concat(specialCharacters, lowerCasedCharacters, upperCasedCharacters)
     }
@@ -157,8 +159,18 @@ function generatePassword() {
         choices = upperCasedCharacters
     }
 console.log(choices);
+
+ return generatePassword() 
+}
+// Function to generate password with user input
+
+function generatePassword() {
+
 let pw = "";
+
 console.log(pw);
+
+// 
 for (let i = 0; i < enter; i++) {
   var index = Math.floor(Math.random() * choices.length);
   var index2 = Math.floor(Math.random() * choices[index].length);
@@ -168,20 +180,13 @@ for (let i = 0; i < enter; i++) {
 return pw;
 }
 
-// Function for getting a random element from an array
-
-function getRandom() {
-}
-// Function to generate password with user input
-
-//function generatePassword() {
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = getPaswordChoices();
   var passwordText = document.querySelector('#password');
   passwordText.value = password;
 
